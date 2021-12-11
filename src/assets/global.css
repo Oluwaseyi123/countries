@@ -1,0 +1,23 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.light {
+  --primary-color: hsl(0, 0%, 98%);
+  --secondary-color: hsl(0, 0%, 100%);
+  --font-color: hsl(200, 15%, 8%);
+}
+
+.dark {
+  --primary-color: hsl(207, 26%, 17%);
+  --secondary-color: hsl(209, 23%, 22%);
+  --font-color: hsl(0, 0%, 100%);
+}
+
+body {
+  background: var(--primary-color);
+}
+/*# sourceMappingURL=global.css.map */
