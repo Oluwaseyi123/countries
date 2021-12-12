@@ -6,10 +6,11 @@
       id=""
       placeholder="Search for a country"
       v-model="search"
-     
     />
     <select name="" id="">
-      <option v-bind="region"   v-for="region in select" :key="region">{{region}}</option>
+      <option v-bind="region" v-for="region in select" :key="region">
+        {{ region }}
+      </option>
       <!-- <option>Asia</option>
       <option>Europe</option>
       <option>Oceania</option>
@@ -17,29 +18,22 @@
       <option>Antarctic</option>
       <option>Antarctic</option>
       <option>Antarctic</option> -->
-
     </select>
   </div>
- 
+
   <h4 v-if="hasCountries">Loading Countries...</h4>
   <div class="home">
     <TheCountry
-      v-for="country in filterCountries"
-      :key="country.area"
+      v-for="(country, index) in filterCountries"
+      :key="index"
       :id="country.name.common"
-      :population="country.population"
-      :country="country.name.common"
-      :flag="country.flags.png"
-      :capital="country.capital"
-      :region="country.region"
+      :country="country"
     />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
 import TheCountry from "@/components/TheCountry.vue";
-// import axios from "axios";
 
 export default {
   name: "Home",
@@ -47,51 +41,48 @@ export default {
   data() {
     return {
       countries: [],
-      search: '',
-      region: ''
+      search: "",
+      region: "",
     };
   },
   components: {
     TheCountry,
   },
-  mounted(){
-    this.$store.dispatch('getCountries')
+  mounted() {
+    this.$store.dispatch("getCountries");
   },
   computed: {
     filterCountries() {
-      return this.$store.getters.countries.filter((country) => {
-        if(country.name.common.toLowerCase().includes(this.search.toLowerCase()) ===''){
-          console.log('true')
-        }else{
-          return country.name.common.toLowerCase().includes(this.search.toLowerCase())
-        }
-        
-       
-      })
+      let country = this.$store.getters.countries;
+      if (this.search) {
+        country = this.$store.getters.countries.filter((country) =>
+          country.name.common.toLowerCase().includes(this.search.toLowerCase())
+        );
+      }
+      return country;
     },
-    hasCountries(){
-      return this.$store.getters.hasCountries
+
+    hasCountries() {
+      return this.$store.getters.hasCountries;
     },
-    select(){
-      return this.filterRegion()
-    }
+    select() {
+      return this.filterRegion();
+    },
   },
   methods: {
-    filterRegion(){
+    filterRegion() {
       const regionArray = this.$store.getters.countries.filter((country) => {
-        return country.region
-      })
-      for(var region of regionArray){
-        if(regionArray.indexOf(region) === -1){
-          regionArray.push(region)
+        return country.region;
+      });
+      for (var region of regionArray) {
+        if (regionArray.indexOf(region) === -1) {
+          regionArray.push(region);
         }
-
-        console.log(regionArray)
       }
-    //   const uniqueSet = new Set(regionArray)
-    //  return console.log([...uniqueSet])
-    }
-  }
+      //   const uniqueSet = new Set(regionArray)
+      //  return console.log([...uniqueSet])
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>

@@ -1,11 +1,11 @@
 <template>
   <div class="country-container">
-    <router-link :to="`/country/${id}`"> <img :src="flag" alt="" /></router-link>
+    <router-link :to="`/country/${id}`"> <img :src="country.flags.png" alt="" /></router-link>
     <div class="country-details">
-      <router-link :to="`/country/${id}`"> <h1>{{country}} </h1> </router-link> 
-      <p>Population: <span>{{ population }}</span> </p>
-      <p>Region: <span>{{ region }}</span> </p>
-      <p >Capital: <span>{{ capital }}</span> </p>
+      <router-link :to="`/country/${id}`"> <h1>{{country.name.common}} </h1> </router-link> 
+      <p>Population: <span>{{ country.population }}</span> </p>
+      <p>Region: <span>{{ country.region }}</span> </p>
+      <p >Capital: <span>{{ country.capital }}</span> </p>
     </div>
   </div>
 </template>
