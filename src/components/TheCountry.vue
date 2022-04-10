@@ -5,7 +5,7 @@
       <router-link :to="`/country/${id}`"> <h1>{{country.name.common}} </h1> </router-link> 
       <p>Population: <span>{{ country.population }}</span> </p>
       <p>Region: <span>{{ country.region }}</span> </p>
-      <p >Capital: <span>{{ country.capital }}</span> </p>
+      <p >Capital: <span v-for="capital in country.capital" :key="capital">{{ capital }}</span> </p>
     </div>
   </div>
 </template>
@@ -13,7 +13,7 @@
 <script>
 
 export default {
-  props: ['country', 'population', 'region', 'capital', 'flag', 'id'],
+  props: ['country', 'id'],
   
 };
 </script>
